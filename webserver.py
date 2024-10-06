@@ -37,9 +37,9 @@ N1 = 377180803631559969029262214834750204509276575554825869886166205428879979800
 N2 = 78074008874160198520644763525212887401909906723592317393988542598630163514318
 
 if start_mode == 'classic':
-    #Point_Coefficient = 55066263022277343669578718895168534326250603453777594175500187360389116729240
+    Point_Coefficient = 55066263022277343669578718895168534326250603453777594175500187360389116729240
     #Point_Coefficient = 2
-    Point_Coefficient = 1
+    #Point_Coefficient = 1
     G = ice.scalar_multiplication(Point_Coefficient)
     current_mode = "classic_G_Point"
     
@@ -468,8 +468,8 @@ class WebServer(BaseHTTPRequestHandler):
                 with open("found.txt", "a", encoding="utf-8") as f:
                     f.write(f"Address: {addrbech32_inv} Private Key: {hex(add_inv)[2:].zfill(64)}\n")
 
-            n1 = mul(N1,div(numb, Point_Coefficient))
-            n2 = mul(N2,div(numb, Point_Coefficient))
+            n1 = mul(N1, numb)
+            n2 = mul(N2, numb)
             if n1 < n2:
                 same1n = n1
                 same2n = n2
