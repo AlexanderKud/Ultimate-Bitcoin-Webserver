@@ -6,5 +6,5 @@
 
 <pre>
   First thing create a bloomfilter from adrress txt file.
-  You can download it from here <a>http://addresses.loyce.club/</a> right-hand side.
+  You can download it from here <a href="http://addresses.loyce.club/">http://addresses.loyce.club/</a> right-hand side.
 </pre>
