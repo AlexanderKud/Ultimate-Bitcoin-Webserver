@@ -11,7 +11,7 @@
   After that just run create_bloomfilter.py
 </pre>
 <pre>
-  <p>Usage </p>
+  # Usage
   Paste in the Search Field:
   5HpHagT65TZzG1PH3CSu63k8DbpvD8s5ip4nEB3kEsreCHK2Zzv - find the page by WIF
   from 1 up to 
