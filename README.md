@@ -5,8 +5,10 @@
 ![Screenshot from 2024-10-06 14-13-08](https://github.com/user-attachments/assets/12c4e3eb-212e-4539-b3a6-9b9c3f45c307)
 
 <pre>
-  First thing create a bloomfilter from adrress txt file.
-  You can download it from here <a href="http://addresses.loyce.club/">http://addresses.loyce.club/</a> right-hand side.
-  Donwload and unpack to the folder with webserver. Or use your own txt address file.
- 
+  First thing create a bloomfilter from address txt file.
+  You can download it from here <a href="http://addresses.loyce.club/">http://addresses.loyce.club/</a> right-hand column.
+  Donwload and unpack to the folder with webserver. Or use your own txt address file. 
+</pre>
+<pre>
+  <h3>Usage:</h3>
 </pre>
