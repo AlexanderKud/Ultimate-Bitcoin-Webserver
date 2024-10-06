@@ -70,7 +70,7 @@
     current_mode = "random_G_Point"
 </pre>
 <pre>
-    in the pop-up windows lower screenshot.
+    in the pop-up windows lower screenshots.
     private keys of additive inverse point and endomorphism are clickable and will lead to page where they are.
     sha256 hashes of Private and Public ECDSA Keys are all clickable and are used as private keys to lead to the page where the are.
 </pre>
