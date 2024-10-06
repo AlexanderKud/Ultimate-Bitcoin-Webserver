@@ -7,8 +7,16 @@
 <pre>
   First thing create a bloomfilter from address txt file.
   You can download it from here <a href="http://addresses.loyce.club/">http://addresses.loyce.club/</a> right-hand column.
-  Donwload and unpack to the folder with webserver. Or use your own txt address file. 
+  Donwload and unpack to the folder with webserver. Or use your own txt address file.
+  After that just run create_bloomfilter.py
 </pre>
 <pre>
-  <h3>Usage:</h3>
+  Usage:
+  Paste in the Search Field:
+  5HpHagT65TZzG1PH3CSu63k8DbpvD8s5ip4nEB3kEsreCHK2Zzv / KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9M7rFU7ALyvVJah - to find page by WIF
+  from 1 up to 904625697166532776746648320380374280100293470930272690489102837043110636675 - go to page #
+  [1333] - change page increment
+  (576460752303423489-1152921504606846977) - change random range
+  @40173800361690050088518435151492858291456367352014594789183229466705919956354 - find the page by decimal private key
+  $847e0d113ab3fc2f9e0687854bd2cc53a15196c8dc86daa57be643b6d85a2e09 - find the page by hex private key
 </pre>
