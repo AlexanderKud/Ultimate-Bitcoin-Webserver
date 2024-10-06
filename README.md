@@ -22,3 +22,16 @@
   @401738003616900500885184 - find the page by decimal private key
   $847e0d113ab3fc2f9e068785 - find the page by hex private key
 </pre>
+<pre>
+  in the webserver.py lines 17-25 you can change the width of columns
+  according to you screen.
+  column1 = '490'
+  column2 = '392'
+  column3 = '266'
+  column4 = '268'
+  column5 = '270'
+  column6 = '330'
+  column7 = '480'
+  column8 = '480'
+  column9 = '398'
+</pre>
