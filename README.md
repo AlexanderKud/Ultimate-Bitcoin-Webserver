@@ -10,7 +10,7 @@
   Donwload and unpack to the folder with webserver. Or use your own txt address file.
   After that just run create_bloomfilter.py
   In the browser: http://localhost:3333/1
-  In the browser check the found: http://localhost:3333/0
+  In the browser check the balance on the page: http://localhost:3333/0
 </pre>
 <pre>
   Paste in the Search Field:
