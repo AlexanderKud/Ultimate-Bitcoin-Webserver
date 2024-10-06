@@ -35,3 +35,35 @@
   column8 = '480'
   column9 = '398'
 </pre>
+<pre>
+  in the webserver.py lines 28-29 you can change the speed of random and bruteforce.
+  random_speed = 120
+  bruteforce_speed = 120
+  normal when it stops immediately after stop button clicked.
+</pre>
+<pre>
+  in the webserver.py lines 31-33 you can change the mode. default is classic. random is commented.
+  # classic or random (classic - secp256k1 G, random - random scalar and its pubkey as G)
+  start_mode = 'classic' 
+  #start_mode = 'random'
+  that affects lines 39-49 in webserver.py:
+  
+  random mode picks a scalar from range 1...N and then it is used in scalar multiplication 
+  and its public key as G (Generator Point).
+  
+  classic mode uses 1 and its public key as G (Generator Point).
+  Or you can manually set for testing purposes any scalar from range 1...N
+  to Point_Coefficient = ... and its public key will be used as G.
+  
+  if start_mode == 'classic':
+    #Point_Coefficient = 55066263022277343669578718895168534326250603453777594175500187360389116729240
+    #Point_Coefficient = 2
+    Point_Coefficient = 1
+    G = ice.scalar_multiplication(Point_Coefficient)
+    current_mode = "classic_G_Point"
+    
+  if start_mode == 'random':
+    Point_Coefficient = random.randrange(1, N)
+    G = ice.scalar_multiplication(Point_Coefficient)
+    current_mode = "random_G_Point"
+</pre>
