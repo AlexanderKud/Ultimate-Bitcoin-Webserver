@@ -468,8 +468,8 @@ class WebServer(BaseHTTPRequestHandler):
                 with open("found.txt", "a", encoding="utf-8") as f:
                     f.write(f"Address: {addrbech32_inv} Private Key: {hex(add_inv)[2:].zfill(64)}\n")
 
-            n1 = mul(N1,numb)
-            n2 = mul(N2,numb)
+            n1 = mul(N1,div(numb, Point_Coefficient))
+            n2 = mul(N2,div(numb, Point_Coefficient))
             if n1 < n2:
                 same1n = n1
                 same2n = n2
