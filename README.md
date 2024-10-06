@@ -11,10 +11,11 @@
   After that just run create_bloomfilter.py
 </pre>
 <pre>
-  Usage Paste in the Search Field:
-  5HpHagT65TZzG1PH3CSu63k8DbpvD8s5ip4nEB3kEsreCHK2Zzv - find page by WIF
+  <p>Usage </p>
+  Paste in the Search Field:
+  5HpHagT65TZzG1PH3CSu63k8DbpvD8s5ip4nEB3kEsreCHK2Zzv - find the page by WIF
   from 1 up to 
-  904625697166532776746648320380374280100293470930272690489102837043110636675 - go to page #
+  904625697166532776746648320380374280100293470930272690489102837043110636675 - go to the page #
   [1333] - change page increment
   (576460752303423489-1152921504606846977) - change random range
   @401738003616900500885184 - find the page by decimal private key
