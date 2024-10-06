@@ -9,6 +9,8 @@
   You can download it from here <a href="http://addresses.loyce.club/">http://addresses.loyce.club/</a> right-hand column.
   Donwload and unpack to the folder with webserver. Or use your own txt address file.
   After that just run create_bloomfilter.py
+  In the browser: http://localhost:3333/1
+  In the browser check the found: http://localhost:3333/0
 </pre>
 <pre>
   Paste in the Search Field:
