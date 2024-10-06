@@ -7,4 +7,6 @@
 <pre>
   First thing create a bloomfilter from adrress txt file.
   You can download it from here <a href="http://addresses.loyce.club/">http://addresses.loyce.club/</a> right-hand side.
+  Donwload and unpack to the folder with webserver. Or use your own txt address file.
+ 
 </pre>
