@@ -10,6 +10,7 @@
   First thing create a bloomfilter from address txt file.
   You can download it from here <a href="http://addresses.loyce.club/">http://addresses.loyce.club/</a> right-hand column.
   Donwload and unpack to the folder with webserver. Or use your own txt address file.
+  if you use your own  file with addresses uncomment and put its name in line 10 of create_bloomfilter.py
   After that just run create_bloomfilter.py
   In the browser: http://localhost:3333/1
   In the browser check the balance on the page: http://localhost:3333/0
