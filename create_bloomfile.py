@@ -6,6 +6,8 @@ files = os.listdir(os.getcwd())
 for f in files:
     if 'Bitcoin_addresses' in f:
         filename = f
+        
+#filename = 'yourfilename'
 
 _bits, _hashes = ice.bloom_para(53000000*2, 0.000001)
 _bf = (b'\x00') * (_bits//8)
