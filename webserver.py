@@ -37,8 +37,6 @@ N1 = 377180803631559969029262214834750204509276575554825869886166205428879979800
 N2 = 78074008874160198520644763525212887401909906723592317393988542598630163514318
 
 if start_mode == 'classic':
-    #Point_Coefficient = 55066263022277343669578718895168534326250603453777594175500187360389116729240
-    #Point_Coefficient = 2
     Point_Coefficient = 1
     G = ice.scalar_multiplication(Point_Coefficient)
     current_mode = "classic_G_Point"
@@ -340,8 +338,7 @@ class WebServer(BaseHTTPRequestHandler):
     starting_key_hex=ending_key_hex=privateKey=privateKey_C=publicKey=publicKey_C= '' #searchKeyU when we search for page by pasting privatekey decimal in url localhost:3333/@10985746
     bloomfile = 'bloomfile_btc.bf'
     print(f'[{datetime.now().strftime("%H:%M:%S")}] Reading bloomfilter from {bloomfile}')
-    _bits, _hashes, _bf = ice.read_bloom_file(bloomfile)
-    #print(f'[{datetime.now().strftime("%H:%M:%S")}] Bloomfilter ready')
+    _bits, _hashes, _bf, _fp, _elem = ice.read_bloom_file(bloomfile)
     settings = open("count.txt", 'r')
     addr_count = (settings.readline()).strip()
     date_stamp = settings.readline()
@@ -566,11 +563,11 @@ class WebServer(BaseHTTPRequestHandler):
 <p id='wif' style='color:#DE3163;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='pubkey' style='background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'><span id='pubkey_prefix' style="color:#D4AC0D;"></span><span id="pubkey_x" style="color:#21618C;"></span><span id="pubkey_y" style="color:#239B56;"></span></p>
 <p id='fun5' style='color:#21618C;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'><span id='pubkey_prefix_c' style="color:#D4AC0D;"></span><span id="pubkey_x_c" style="color:#21618C;"></span></p>
-<p id='sha256' style='color:#DE3163;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='fun2x' style='color:#21618C;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='fun2y' style='color:#239B56;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='fun3x' style='color:#21618C;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='fun3y' style='color:#239B56;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
+<p id='sha256' style='color:#DE3163;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='fun4' style='color:#34495E ;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='sha256_1' style='color:#DE3163;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='sha256_2' style='color:#DE3163;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
@@ -1191,11 +1188,11 @@ $('#arrow_right').click(function() {
 <p id='wif' style='color:#DE3163;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='pubkey' style='background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'><span id='pubkey_prefix' style="color:#D4AC0D;"></span><span id="pubkey_x" style="color:#21618C;"></span><span id="pubkey_y" style="color:#239B56;"></span></p>
 <p id='fun5' style='color:#21618C;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'><span id='pubkey_prefix_c' style="color:#D4AC0D;"></span><span id="pubkey_x_c" style="color:#21618C;"></span></p>
-<p id='sha256' style='color:#DE3163;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='fun2x' style='color:#21618C;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='fun2y' style='color:#239B56;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='fun3x' style='color:#21618C;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='fun3y' style='color:#239B56;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
+<p id='sha256' style='color:#DE3163;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='fun4' style='color:#34495E ;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='sha256_1' style='color:#DE3163;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='sha256_2' style='color:#DE3163;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
@@ -1702,7 +1699,7 @@ input[type=text], select {width:640px;padding:8px 10px;margin: 2px 0;display: in
 #search_line:focus {outline: none !important;border:1px solid #D5DBDB;box-shadow: 0 0 4px #719ECE;}
 </style>""", "utf-8"))
             #----------jquery library load------------------------------------
-            with open("jquery-3.7.0.js", "r") as f:
+            with open("jquery-3.7.1.js", "r") as f:
                 data = f.read()
             self.wfile.write(bytes("<script>"+str(data)+"</script>", "utf-8"))
             self.wfile.write(bytes("<script>const point_coefficient=BigInt('"+str(Point_Coefficient)+"');</script>", "utf-8"))
@@ -1868,11 +1865,11 @@ $('#stop_auto_seq').click(function() {
 <p id='wif' style='color:#DE3163;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='pubkey' style='background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'><span id='pubkey_prefix' style="color:#D4AC0D;"></span><span id="pubkey_x" style="color:#21618C;"></span><span id="pubkey_y" style="color:#239B56;"></span></p>
 <p id='fun5' style='color:#21618C;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'><span id='pubkey_prefix_c' style="color:#D4AC0D;"></span><span id="pubkey_x_c" style="color:#21618C;"></span></p>
-<p id='sha256' style='color:#DE3163;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='fun2x' style='color:#21618C;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='fun2y' style='color:#239B56;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='fun3x' style='color:#21618C;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='fun3y' style='color:#239B56;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
+<p id='sha256' style='color:#DE3163;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='fun4' style='color:#34495E ;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='sha256_1' style='color:#DE3163;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='sha256_2' style='color:#DE3163;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
