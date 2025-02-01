@@ -46,7 +46,7 @@ if start_mode == 'random':
     G = ice.scalar_multiplication(Point_Coefficient)
     current_mode = "random_G_Point"
 
-def multiplicative_inverse(x, m):
+def multiplicative_inverse(x, m): # for prime modulus only
     return pow(x, m - 2, m)
 
 def additive_inverse(a):
@@ -962,9 +962,9 @@ $('.show_popup').click(function() {
         $('#funaddr5').html("<span style='color:brown;font-weight:bold;'>Taproot tweaked private key: <span style='color:#DE3163;'>"+myArray[45]+"</span></span>");
         $('#funaddr6').html("<span style='color:brown;font-weight:bold;'>Taproot tweaked public key: <span style='color:#21618C;'>"+myArray[46]+"</span></span>");
         $('#wif').html("<span style='color:gray;'>"+myArray[47]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:gray;'>"+myArray[48]+"</span>");
-        $('#sha256').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[49]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[50]+"</span>");
-        $('#sha256_1').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[51]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[52]+"</span>");
-        $('#sha256_2').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[53]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[54]+"</span>");
+        $('#sha256').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[49]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[50]+"</span>");
+        $('#sha256_1').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[51]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[52]+"</span>");
+        $('#sha256_2').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[53]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[54]+"</span>");
         $('.inner_address').click(function() {
             $(this).css("font-weight", "bold");
         })
@@ -1069,9 +1069,9 @@ $('#arrow_left').click(function() {
             $('#funaddr5').html("<span style='color:brown;font-weight:bold;'>Taproot tweaked private key: <span style='color:#DE3163;'>"+myArray[45]+"</span></span>");
             $('#funaddr6').html("<span style='color:brown;font-weight:bold;'>Taproot tweaked public key: <span style='color:#21618C;'>"+myArray[46]+"</span></span>");
             $('#wif').html("<span style='color:gray;'>"+myArray[47]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:gray;'>"+myArray[48]+"</span>");
-            $('#sha256').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[49]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[50]+"</span>");
-            $('#sha256_1').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[51]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[52]+"</span>");
-            $('#sha256_2').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[53]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[54]+"</span>");
+            $('#sha256').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[49]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[50]+"</span>");
+            $('#sha256_1').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[51]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[52]+"</span>");
+            $('#sha256_2').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[53]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[54]+"</span>");
             $('.inner_address').click(function() {
                 $(this).css("font-weight", "bold");
             })
@@ -1143,9 +1143,9 @@ $('#arrow_right').click(function() {
             $('#funaddr5').html("<span style='color:brown;font-weight:bold;'>Taproot tweaked private key: <span style='color:#DE3163;'>"+myArray[45]+"</span></span>");
             $('#funaddr6').html("<span style='color:brown;font-weight:bold;'>Taproot tweaked public key: <span style='color:#21618C;'>"+myArray[46]+"</span></span>");
             $('#wif').html("<span style='color:gray;'>"+myArray[47]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:gray;'>"+myArray[48]+"</span>");
-            $('#sha256').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[49]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[50]+"</span>");
-            $('#sha256_1').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[51]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[52]+"</span>");
-            $('#sha256_2').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[53]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[54]+"</span>");
+            $('#sha256').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[49]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[50]+"</span>");
+            $('#sha256_1').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[51]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[52]+"</span>");
+            $('#sha256_2').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[53]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[54]+"</span>");
             $('.inner_address').click(function() {
                 $(this).css("font-weight", "bold");
             })
@@ -1456,9 +1456,9 @@ $('.show_popup').click(function() {
         $('#funaddr5').html("<span style='color:brown;font-weight:bold;'>Taproot tweaked private key: <span style='color:#DE3163;'>"+myArray[45]+"</span></span>");
         $('#funaddr6').html("<span style='color:brown;font-weight:bold;'>Taproot tweaked public key: <span style='color:#21618C;'>"+myArray[46]+"</span></span>");
         $('#wif').html("<span style='color:gray;'>"+myArray[47]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:gray;'>"+myArray[48]+"</span>");
-        $('#sha256').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[49]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[50]+"</span>");
-        $('#sha256_1').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[51]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[52]+"</span>");
-        $('#sha256_2').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[53]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[54]+"</span>");
+        $('#sha256').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[49]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[50]+"</span>");
+        $('#sha256_1').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[51]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[52]+"</span>");
+        $('#sha256_2').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[53]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[54]+"</span>");
         $('.inner_address').click(function() {
             $(this).css("font-weight", "bold");
         })
@@ -1563,9 +1563,9 @@ $('#arrow_left').click(function() {
             $('#funaddr5').html("<span style='color:brown;font-weight:bold;'>Taproot tweaked private key: <span style='color:#DE3163;'>"+myArray[45]+"</span></span>");
             $('#funaddr6').html("<span style='color:brown;font-weight:bold;'>Taproot tweaked public key: <span style='color:#21618C;'>"+myArray[46]+"</span></span>");
             $('#wif').html("<span style='color:gray;'>"+myArray[47]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:gray;'>"+myArray[48]+"</span>");
-            $('#sha256').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[49]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[50]+"</span>");
-            $('#sha256_1').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[51]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[52]+"</span>");
-            $('#sha256_2').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[53]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[54]+"</span>");
+            $('#sha256').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[49]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[50]+"</span>");
+            $('#sha256_1').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[51]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[52]+"</span>");
+            $('#sha256_2').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[53]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[54]+"</span>");
             $('.inner_address').click(function() {
                 $(this).css("font-weight", "bold");
             })
@@ -1637,9 +1637,9 @@ $('#arrow_right').click(function() {
             $('#funaddr5').html("<span style='color:brown;font-weight:bold;'>Taproot tweaked private key: <span style='color:#DE3163;'>"+myArray[45]+"</span></span>");
             $('#funaddr6').html("<span style='color:brown;font-weight:bold;'>Taproot tweaked public key: <span style='color:#21618C;'>"+myArray[46]+"</span></span>");
             $('#wif').html("<span style='color:gray;'>"+myArray[47]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:gray;'>"+myArray[48]+"</span>");
-            $('#sha256').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[49]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[50]+"</span>");
-            $('#sha256_1').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[51]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[52]+"</span>");
-            $('#sha256_2').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[53]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[54]+"</span>");
+            $('#sha256').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[49]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[50]+"</span>");
+            $('#sha256_1').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[51]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[52]+"</span>");
+            $('#sha256_2').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[53]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[54]+"</span>");
             $('.inner_address').click(function() {
                 $(this).css("font-weight", "bold");
             })
@@ -2276,9 +2276,9 @@ $('.show_popup').click(function() {
         $('#funaddr5').html("<span style='color:brown;font-weight:bold;'>Taproot tweaked private key: <span style='color:#DE3163;'>"+myArray[45]+"</span></span>");
         $('#funaddr6').html("<span style='color:brown;font-weight:bold;'>Taproot tweaked public key: <span style='color:#21618C;'>"+myArray[46]+"</span></span>");
         $('#wif').html("<span style='color:gray;'>"+myArray[47]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:gray;'>"+myArray[48]+"</span>");
-        $('#sha256').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[49]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[50]+"</span>");
-        $('#sha256_1').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[51]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[52]+"</span>");
-        $('#sha256_2').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[53]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[54]+"</span>");
+        $('#sha256').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[49]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[50]+"</span>");
+        $('#sha256_1').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[51]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[52]+"</span>");
+        $('#sha256_2').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[53]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[54]+"</span>");
         $('.inner_address').click(function() {
             $(this).css("font-weight", "bold");
         })
@@ -2385,9 +2385,9 @@ $('#arrow_left').click(function() {
             $('#funaddr5').html("<span style='color:brown;font-weight:bold;'>Taproot tweaked private key: <span style='color:#DE3163;'>"+myArray[45]+"</span></span>");
             $('#funaddr6').html("<span style='color:brown;font-weight:bold;'>Taproot tweaked public key: <span style='color:#21618C;'>"+myArray[46]+"</span></span>");
             $('#wif').html("<span style='color:gray;'>"+myArray[47]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:gray;'>"+myArray[48]+"</span>");
-            $('#sha256').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[49]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[50]+"</span>");
-            $('#sha256_1').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[51]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[52]+"</span>");
-            $('#sha256_2').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[53]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[54]+"</span>");
+            $('#sha256').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[49]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[50]+"</span>");
+            $('#sha256_1').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[51]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[52]+"</span>");
+            $('#sha256_2').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[53]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[54]+"</span>");
             $('.inner_address').click(function() {
                 $(this).css("font-weight", "bold");
             })
@@ -2459,9 +2459,9 @@ $('#arrow_right').click(function() {
             $('#funaddr5').html("<span style='color:brown;font-weight:bold;'>Taproot tweaked private key: <span style='color:#DE3163;'>"+myArray[45]+"</span></span>");
             $('#funaddr6').html("<span style='color:brown;font-weight:bold;'>Taproot tweaked public key: <span style='color:#21618C;'>"+myArray[46]+"</span></span>");
             $('#wif').html("<span style='color:gray;'>"+myArray[47]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:gray;'>"+myArray[48]+"</span>");
-            $('#sha256').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[49]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[50]+"</span>");
-            $('#sha256_1').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[51]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[52]+"</span>");
-            $('#sha256_2').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><span style='color:#9077DF;' class='sha256'>"+myArray[53]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[54]+"</span>");
+            $('#sha256').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[49]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[50]+"</span>");
+            $('#sha256_1').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[51]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[52]+"</span>");
+            $('#sha256_2').html("<span style='color:brown;font-weight:bold;'>SHA256: </span><br><span style='color:#9077DF;' class='sha256'>"+myArray[53]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#9077DF;' class='sha256'>"+myArray[54]+"</span>");
             $('.inner_address').click(function() {
                 $(this).css("font-weight", "bold");
             })
