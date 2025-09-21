@@ -1,4 +1,4 @@
-# Ultimate-Bitcoin-Webserver
+# Ultimate-Bitcoin-Webserver (Linux)
 <b>Powered by <a href="https://github.com/AlexanderKud/Secp256k1_PythonLibrary">https://github.com/AlexanderKud/Secp256k1_PythonLibrary</a></b><br>
 
 <img width="1920" height="1080" alt="Screenshot_2025-09-21_22-44-06" src="https://github.com/user-attachments/assets/fa8758ba-b93c-4413-892d-d935a04c79f2" />
