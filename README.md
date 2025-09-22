@@ -63,12 +63,12 @@
     #Point_Coefficient = 55066263022277343669578718895168534326250603453777594175500187360389116729240
     #Point_Coefficient = 2
     Point_Coefficient = 1
-    G = ice.scalar_multiplication(Point_Coefficient)
+    G = secp256k1.scalar_multiplication(Point_Coefficient)
     current_mode = "classic_G_Point"
     
   if start_mode == 'random':
     Point_Coefficient = random.randrange(1, N)
-    G = ice.scalar_multiplication(Point_Coefficient)
+    G = secp256k1.scalar_multiplication(Point_Coefficient)
     current_mode = "random_G_Point"
 </pre>
 <pre>
