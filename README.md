@@ -22,7 +22,7 @@
   from 1 up to 
   904625697166532776746648320380374280100293470930272690489102837043110636675 - go to the page #
   [1333] - change page increment
-  (576460752303423489-1152921504606846977) - change random range
+  (576460752303423489-1152921504606846977) - change random range (should be in page numbers)
   @401738003616900500885184 - find the page by decimal private key
   $847e0d113ab3fc2f9e068785 - find the page by hex private key
 </pre>
