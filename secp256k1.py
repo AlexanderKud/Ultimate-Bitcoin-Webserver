@@ -53,6 +53,9 @@ secp256k1.increment_point.restype = None
 secp256k1.decrement_point.argtypes = [ctypes.c_char_p, ctypes.c_char_p]
 secp256k1.decrement_point.restype = None
 
+secp256k1.point_on_curve.argtypes = [ctypes.c_char_p]
+secp256k1.point_on_curve.restype = ctypes.c_bool
+
 secp256k1.privatekey_to_hash160.argtypes = [ctypes.c_int, ctypes.c_bool, ctypes.c_char_p, ctypes.c_char_p]
 secp256k1.privatekey_to_hash160.restype = None
 
@@ -114,6 +117,8 @@ def check():
     secp256k1.check()
     
 def scalar_multiplication(pk):
+    pk = pk % N
+    if pk < 0: pk = N + pk
     pvk = str(pk).encode()
     res = bytes(65)
     secp256k1.scalar_multiplication(pvk, res)
@@ -205,6 +210,9 @@ def decrement_point(pBytes):
     secp256k1.decrement_point(pBytes, res)
     return res
 
+def point_on_curve(pBytes):
+    return secp256k1.point_on_curve(pBytes)
+
 def privatekey_to_hash160(addr_type, compressed, pk):
     pvk = str(pk).encode()
     res = bytes(20)
@@ -287,5 +295,3 @@ def bloom_add(index, item):
 def bloom_check(index, item):
     if type(item) != bytes: item = str(item).encode()
     return secp256k1.bloom_check(index, item, len(item))
-    
-    
