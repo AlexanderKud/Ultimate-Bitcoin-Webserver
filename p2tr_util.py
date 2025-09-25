@@ -186,5 +186,5 @@ def taproot_tweak_seckey(seckey0: bytes) -> bytes:
 def public_key_x_coordinate_to_taproot_tweaked_pubkey(public_key_x_coordinate: bytes) -> bytes:
     P = lift_x(public_key_x_coordinate)
     t = int_from_bytes(tagged_hash("TapTweak", bytes_from_int(int(public_key_x_coordinate.hex(), 16))))
-    Q = secp256k1.add_points_safe(P, secp256k1.scalar_multiplication(t))
+    Q = secp256k1.add_points(P, secp256k1.scalar_multiplication(t))
     return bytes_from_int(get_x(Q))

@@ -379,8 +379,8 @@ class WebServer(BaseHTTPRequestHandler):
             idxN = str_url.index("!") #find ! after goes the number we need
             numb = int(str_url[idxN+1:],10) #get the number from url
             numb_inverse = 0 - additive_inverse(numb)
-            wif_U = secp256k1.privatekey_to_wif(False, numb)
-            wif_C = secp256k1.privatekey_to_wif(True, numb)
+            wif_U = secp256k1.privatekey_to_uwif(numb)
+            wif_C = secp256k1.privatekey_to_cwif(numb)
             pub = secp256k1.scalar_multiplication(numb)
             P = pub.hex() #getting point coordinates
             P_sha256 = sha256(P)
@@ -876,8 +876,8 @@ class WebServer(BaseHTTPRequestHandler):
             pub = secp256k1.scalar_multiplication((__class__.startPrivKey*Point_Coefficient)%N)
             for i in range(128): #generating addresses and WIFS to show on page
                 __class__.starting_key_hex = hex((__class__.startPrivKey*Point_Coefficient)%N)[2:].zfill(64)
-                __class__.privKey_C = secp256k1.privatekey_to_wif(True, int(__class__.starting_key_hex, 16))
-                __class__.privKey = secp256k1.privatekey_to_wif(False, int(__class__.starting_key_hex, 16))
+                __class__.privKey = secp256k1.privatekey_to_uwif(int(__class__.starting_key_hex, 16))
+                __class__.privKey_C = secp256k1.privatekey_to_cwif(int(__class__.starting_key_hex, 16))
                 __class__.bitAddr = secp256k1.publickey_to_address(0, False, pub)
                 __class__.bitAddr_C = secp256k1.publickey_to_address(0, True, pub)
                 addrP2sh = secp256k1.publickey_to_address(1, True, pub) #p2sh
@@ -932,7 +932,7 @@ class WebServer(BaseHTTPRequestHandler):
                      break
                 
                 __class__.startPrivKey += 1
-                pub = secp256k1.add_points_safe(pub, G)
+                pub = secp256k1.add_points(pub, G)
 
             if __class__.balance_on_page == "True":
                 mixer.init()
@@ -1405,8 +1405,8 @@ $('#arrow_right').click(function() {
             pub = secp256k1.scalar_multiplication((__class__.startPrivKey*Point_Coefficient)%N)
             for i in range(128): #generating addresses and WIFS to show on page
                 __class__.starting_key_hex = hex((__class__.startPrivKey*Point_Coefficient)%N)[2:].zfill(64)
-                __class__.privKey_C = secp256k1.privatekey_to_wif(True, int(__class__.starting_key_hex, 16))
-                __class__.privKey = secp256k1.privatekey_to_wif(False, int(__class__.starting_key_hex, 16))
+                __class__.privKey = secp256k1.privatekey_to_uwif(int(__class__.starting_key_hex, 16))
+                __class__.privKey_C = secp256k1.privatekey_to_cwif(int(__class__.starting_key_hex, 16))
                 __class__.bitAddr = secp256k1.publickey_to_address(0, False, pub)
                 __class__.bitAddr_C = secp256k1.publickey_to_address(0, True, pub)
                 addrP2sh = secp256k1.publickey_to_address(1, True, pub) #p2sh
@@ -1455,7 +1455,7 @@ $('#arrow_right').click(function() {
                      break
                      
                 __class__.startPrivKey += 1
-                pub = secp256k1.add_points_safe(pub, G)
+                pub = secp256k1.add_points(pub, G)
 
             if __class__.balance_on_page == "True":
                 mixer.init()
@@ -2254,8 +2254,8 @@ $('#stop_auto_seq').click(function() {
             pub = secp256k1.scalar_multiplication((__class__.startPrivKey*Point_Coefficient)%N)
             for i in range(128): #generating addresses and WIFS to show on page
                 __class__.starting_key_hex = hex((__class__.startPrivKey*Point_Coefficient)%N)[2:].zfill(64)
-                __class__.privKey_C = secp256k1.privatekey_to_wif(True, int(__class__.starting_key_hex, 16))
-                __class__.privKey = secp256k1.privatekey_to_wif(False, int(__class__.starting_key_hex, 16))
+                __class__.privKey = secp256k1.privatekey_to_uwif(int(__class__.starting_key_hex, 16))
+                __class__.privKey_C = secp256k1.privatekey_to_cwif(int(__class__.starting_key_hex, 16))
                 __class__.bitAddr = secp256k1.publickey_to_address(0, False, pub)
                 __class__.bitAddr_C = secp256k1.publickey_to_address(0, True, pub)
                 addrP2sh = secp256k1.publickey_to_address(1, True, pub) #p2sh
@@ -2310,7 +2310,7 @@ $('#stop_auto_seq').click(function() {
                      break
                 
                 __class__.startPrivKey += 1
-                pub = secp256k1.add_points_safe(pub, G)
+                pub = secp256k1.add_points(pub, G)
 
             if __class__.balance_on_page == "True":
                 mixer.init()
