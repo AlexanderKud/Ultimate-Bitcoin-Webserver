@@ -29,13 +29,13 @@ column9 = '398'
 random_speed = 100
 bruteforce_speed = 100
 
-# classic or random (classic - secp256k1 G, random - random scalar and its pubkey as G)
-start_mode = 'classic' 
-#start_mode = 'random'
-
 N = 115792089237316195423570985008687907852837564279074904382605163141518161494337
 N1 = 37718080363155996902926221483475020450927657555482586988616620542887997980018
 N2 = 78074008874160198520644763525212887401909906723592317393988542598630163514318
+
+# classic or random (classic - secp256k1 G, random - random scalar and its pubkey as G)
+start_mode = 'classic' 
+#start_mode = 'random'
 
 if start_mode == 'classic':
     #Point_Coefficient = 30781790967544911494582500996531003187086143316059192026830350010175657684227
@@ -45,9 +45,8 @@ if start_mode == 'classic':
     #Point_Coefficient = (2**3000) % N
     G = secp256k1.scalar_multiplication(Point_Coefficient)
     #G = secp256k1lib.scalar_multiplication(Point_Coefficient)
-    current_mode = "classic_G_Point"
-    
-if start_mode == 'random':
+    current_mode = "classic_G_Point"    
+elif start_mode == 'random':
     Point_Coefficient = random.randrange(1, N)
     G = secp256k1.scalar_multiplication(Point_Coefficient)
     current_mode = "random_G_Point"
@@ -377,24 +376,21 @@ class WebServer(BaseHTTPRequestHandler):
         str_url = self.path[1:] #removing / from url as we do not need it
         if str_url.startswith("!"): # handle ajax request to get all data for modal popup window
             idxN = str_url.index("!") #find ! after goes the number we need
-            numb = int(str_url[idxN+1:],10) #get the number from url
+            numb = int(str_url[idxN+1:], 10) #get the number from url
             numb_inverse = 0 - additive_inverse(numb)
             wif_U = secp256k1.privatekey_to_uwif(numb)
             wif_C = secp256k1.privatekey_to_cwif(numb)
             pub = secp256k1.scalar_multiplication(numb)
-            P = pub.hex() #getting point coordinates
-            P_sha256 = sha256(P)
-            P_X = P[2:66]
-            P_Y = P[66:]
+            P_sha256 = sha256(pub.hex())
+            P_X = pub[1:33].hex()
+            P_Y = pub[33:].hex()
             pubkey_compressed = secp256k1.point_to_cpub(pub)
             pubkey_comp_sha256 = sha256(pubkey_compressed)
             rmdU = secp256k1.privatekey_to_hash160(0, False, numb)  #Uncompressed RIPEMD160
             rmdC = secp256k1.privatekey_to_hash160(0, True, numb)  #Compressed RIPEMD160
-            rmdU_pref = '00' + secp256k1.privatekey_to_hash160(0, False, numb)  #Uncompressed RIPEMD160 prefix
-            rmdC_pref = '00' + secp256k1.privatekey_to_hash160(0, True, numb)  #Compressed RIPEMD160 prefix
             ######
-            rmdU_pref_sha256_1 = sha256(rmdU_pref)
-            rmdC_pref_sha256_1 = sha256(rmdC_pref)
+            rmdU_pref_sha256_1 = sha256('00' + rmdU)
+            rmdC_pref_sha256_1 = sha256('00' + rmdU)
             rmdU_pref_sha256_2 = sha256(rmdU_pref_sha256_1)
             rmdC_pref_sha256_2 = sha256(rmdC_pref_sha256_1)
             ######
@@ -445,9 +441,8 @@ class WebServer(BaseHTTPRequestHandler):
             add_inv = 115792089237316195423570985008687907852837564279074904382605163141518161494337 - numb
             add_inv_inverse = 0 - additive_inverse(add_inv)
             AP_pub = secp256k1.scalar_multiplication(add_inv)
-            AP = AP_pub.hex()
-            AP_X = AP[2:66]
-            AP_Y = AP[66:]
+            AP_X = AP_pub[1:33].hex()
+            AP_Y = AP_pub[33:].hex()
             addrU = secp256k1.publickey_to_address(0, False, AP_pub)
             addrC = secp256k1.publickey_to_address(0, True, AP_pub)
             addrP2sh_inv = secp256k1.publickey_to_address(1, True, AP_pub) #p2sh
@@ -479,14 +474,7 @@ class WebServer(BaseHTTPRequestHandler):
             same2n = n2
             same1n_inverse = 0 - additive_inverse(same1n)
             same2n_inverse = 0 - additive_inverse(same2n)
-            '''
-            if n1 < n2:
-                same1n = n1
-                same2n = n2
-            else:
-                same1n = n2
-                same2n = n1
-            '''
+
             samey1P = secp256k1.scalar_multiplication(same1n)
             sameaddr1U = secp256k1.publickey_to_address(0, False, samey1P)
             sameaddr1C = secp256k1.publickey_to_address(0, True, samey1P)
@@ -875,9 +863,10 @@ class WebServer(BaseHTTPRequestHandler):
             ###---Loop---******************************************************************
             pub = secp256k1.scalar_multiplication((__class__.startPrivKey*Point_Coefficient)%N)
             for i in range(128): #generating addresses and WIFS to show on page
+                prv_key = __class__.startPrivKey * Point_Coefficient % N
                 __class__.starting_key_hex = hex((__class__.startPrivKey*Point_Coefficient)%N)[2:].zfill(64)
-                __class__.privKey = secp256k1.privatekey_to_uwif(int(__class__.starting_key_hex, 16))
-                __class__.privKey_C = secp256k1.privatekey_to_cwif(int(__class__.starting_key_hex, 16))
+                __class__.privKey = secp256k1.privatekey_to_uwif(prv_key)
+                __class__.privKey_C = secp256k1.privatekey_to_cwif(prv_key)
                 __class__.bitAddr = secp256k1.publickey_to_address(0, False, pub)
                 __class__.bitAddr_C = secp256k1.publickey_to_address(0, True, pub)
                 addrP2sh = secp256k1.publickey_to_address(1, True, pub) #p2sh
@@ -1404,9 +1393,10 @@ $('#arrow_right').click(function() {
             ###---Loop---******************************************************************
             pub = secp256k1.scalar_multiplication((__class__.startPrivKey*Point_Coefficient)%N)
             for i in range(128): #generating addresses and WIFS to show on page
+                prv_key = __class__.startPrivKey * Point_Coefficient % N
                 __class__.starting_key_hex = hex((__class__.startPrivKey*Point_Coefficient)%N)[2:].zfill(64)
-                __class__.privKey = secp256k1.privatekey_to_uwif(int(__class__.starting_key_hex, 16))
-                __class__.privKey_C = secp256k1.privatekey_to_cwif(int(__class__.starting_key_hex, 16))
+                __class__.privKey = secp256k1.privatekey_to_uwif(prv_key)
+                __class__.privKey_C = secp256k1.privatekey_to_cwif(prv_key)
                 __class__.bitAddr = secp256k1.publickey_to_address(0, False, pub)
                 __class__.bitAddr_C = secp256k1.publickey_to_address(0, True, pub)
                 addrP2sh = secp256k1.publickey_to_address(1, True, pub) #p2sh
@@ -2253,9 +2243,10 @@ $('#stop_auto_seq').click(function() {
             ###---Loop---******************************************************************
             pub = secp256k1.scalar_multiplication((__class__.startPrivKey*Point_Coefficient)%N)
             for i in range(128): #generating addresses and WIFS to show on page
+                prv_key = __class__.startPrivKey * Point_Coefficient % N
                 __class__.starting_key_hex = hex((__class__.startPrivKey*Point_Coefficient)%N)[2:].zfill(64)
-                __class__.privKey = secp256k1.privatekey_to_uwif(int(__class__.starting_key_hex, 16))
-                __class__.privKey_C = secp256k1.privatekey_to_cwif(int(__class__.starting_key_hex, 16))
+                __class__.privKey = secp256k1.privatekey_to_uwif(prv_key)
+                __class__.privKey_C = secp256k1.privatekey_to_cwif(prv_key)
                 __class__.bitAddr = secp256k1.publickey_to_address(0, False, pub)
                 __class__.bitAddr_C = secp256k1.publickey_to_address(0, True, pub)
                 addrP2sh = secp256k1.publickey_to_address(1, True, pub) #p2sh
