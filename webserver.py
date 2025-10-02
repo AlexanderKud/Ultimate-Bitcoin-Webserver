@@ -15,15 +15,15 @@ from pygame import mixer
 hostName, serverPort = 'localhost', 3333
 
 #---privatekeys and addresses columns width set----------------
-column1 = '490'
-column2 = '392'
-column3 = '266'
-column4 = '268'
-column5 = '270'
-column6 = '330'
-column7 = '480'
-column8 = '480'
-column9 = '398'
+column1 = '490' # Private Key Hex
+column2 = '392' # WIF Private Key Uncompressed
+column3 = '266' # Address P2PKH Uncompressed
+column4 = '268' # Address P2PKH Compressed
+column5 = '270' # Address Segwit P2SH
+column6 = '330' # Address Bech32 P2WPKH
+column7 = '480' # Address Bech32 P2WSH
+column8 = '480' # Address Bech32m P2TR
+column9 = '398' # WIF Private Key Compressed
 #---privatekeys and addresses columns width end----------------
 
 random_speed = 100
