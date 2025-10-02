@@ -398,7 +398,7 @@ class WebServer(BaseHTTPRequestHandler):
             addrC_one = secp256k1.publickey_to_address(0, True, pub)
             addrP2sh_one = secp256k1.publickey_to_address(1, True, pub) #p2sh
             addrbech32_one = secp256k1.publickey_to_address(2, True, pub) #bech32
-            addrbech32_p2wsh = bitcoinlib.keys.Address(secp256k1.point_to_cpub(pub),encoding='bech32',script_type='p2wsh').address #bech32_p2swh
+            addrbech32_p2wsh = bitcoinlib.keys.Address('21'+secp256k1.point_to_cpub(pub)+'ac', encoding='bech32', script_type='p2wsh').address #bech32_p2swh
             private_key = bytes.fromhex(hex(numb).lstrip('0x').zfill(64))
             taproot_tweaked_private_key = p2tr_util.taproot_tweak_seckey(private_key)
             public_key_x_coordinate = pub[1:33]
@@ -871,7 +871,7 @@ class WebServer(BaseHTTPRequestHandler):
                 __class__.bitAddr_C = secp256k1.publickey_to_address(0, True, pub)
                 addrP2sh = secp256k1.publickey_to_address(1, True, pub) #p2sh
                 addrbech32 = secp256k1.publickey_to_address(2, True, pub) #bech32
-                addrbech32_p2wsh = bitcoinlib.keys.Address(secp256k1.point_to_cpub(pub),encoding='bech32',script_type='p2wsh').address #bech32_p2swh
+                addrbech32_p2wsh = bitcoinlib.keys.Address('21'+secp256k1.point_to_cpub(pub)+'ac', encoding='bech32', script_type='p2wsh').address #bech32_p2swh
                 public_key_x_coordinate = pub[1:33]
                 taproot_tweaked_public_key = p2tr_util.public_key_x_coordinate_to_taproot_tweaked_pubkey(public_key_x_coordinate)
                 bech32m_taproot_addr = p2tr_util.pubkey_to_segwit_v1_addr('bc', taproot_tweaked_public_key)
@@ -1401,7 +1401,7 @@ $('#arrow_right').click(function() {
                 __class__.bitAddr_C = secp256k1.publickey_to_address(0, True, pub)
                 addrP2sh = secp256k1.publickey_to_address(1, True, pub) #p2sh
                 addrbech32 = secp256k1.publickey_to_address(2, True, pub) #bech32
-                addrbech32_p2wsh = bitcoinlib.keys.Address(secp256k1.point_to_cpub(pub),encoding='bech32',script_type='p2wsh').address #bech32_p2swh
+                addrbech32_p2wsh = bitcoinlib.keys.Address('21'+secp256k1.point_to_cpub(pub)+'ac', encoding='bech32', script_type='p2wsh').address #bech32_p2swh
                 public_key_x_coordinate = pub[1:33]
                 taproot_tweaked_public_key = p2tr_util.public_key_x_coordinate_to_taproot_tweaked_pubkey(public_key_x_coordinate)
                 bech32m_taproot_addr = p2tr_util.pubkey_to_segwit_v1_addr('bc', taproot_tweaked_public_key)
@@ -2251,7 +2251,7 @@ $('#stop_auto_seq').click(function() {
                 __class__.bitAddr_C = secp256k1.publickey_to_address(0, True, pub)
                 addrP2sh = secp256k1.publickey_to_address(1, True, pub) #p2sh
                 addrbech32 = secp256k1.publickey_to_address(2, True, pub) #bech32
-                addrbech32_p2wsh = bitcoinlib.keys.Address(secp256k1.point_to_cpub(pub),encoding='bech32',script_type='p2wsh').address #bech32_p2swh
+                addrbech32_p2wsh = bitcoinlib.keys.Address('21'+secp256k1.point_to_cpub(pub)+'ac', encoding='bech32', script_type='p2wsh').address #bech32_p2swh
                 public_key_x_coordinate = pub[1:33]
                 taproot_tweaked_public_key = p2tr_util.public_key_x_coordinate_to_taproot_tweaked_pubkey(public_key_x_coordinate)
                 bech32m_taproot_addr = p2tr_util.pubkey_to_segwit_v1_addr('bc', taproot_tweaked_public_key)
