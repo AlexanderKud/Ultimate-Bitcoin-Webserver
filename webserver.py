@@ -72,7 +72,7 @@ def div(a, b): #division
 def sha256(data):
     digest = hashlib.new("sha256")
     digest.update(bytes.fromhex(data))
-    return digest.digest().hex()
+    return digest.hexdigest()
 
 class WebServer(BaseHTTPRequestHandler):
     num=startPrivKey=previous=next=random=random5H=random5J=random5K=randomKw=randomKx=randomKy=randomKz=randomL1=randomL2=randomL3=randomL4=randomL5=0
