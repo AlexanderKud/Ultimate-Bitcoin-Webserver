@@ -73,6 +73,7 @@ def sha256(data):
     digest = hashlib.new("sha256")
     digest.update(bytes.fromhex(data))
     return digest.hexdigest()
+    #return digest.digest().hex()
 
 class WebServer(BaseHTTPRequestHandler):
     num=startPrivKey=previous=next=random=random5H=random5J=random5K=randomKw=randomKx=randomKy=randomKz=randomL1=randomL2=randomL3=randomL4=randomL5=0
@@ -472,6 +473,10 @@ class WebServer(BaseHTTPRequestHandler):
             n2 = mul(N2, numb)
             same1n = n1
             same2n = n2
+            aminusb = sub(n1, n2)
+            bminusa = sub(n2, n1)
+            aminusb_div = div(aminusb, 3)
+            bminusa_div = div(bminusa, 3)
             same1n_inverse = 0 - additive_inverse(same1n)
             same2n_inverse = 0 - additive_inverse(same2n)
 
@@ -542,7 +547,8 @@ class WebServer(BaseHTTPRequestHandler):
             +taproot_tweaked_private_key.hex()+" "+taproot_tweaked_public_key.hex()+ " " \
             +wif_U+" "+wif_C+" "+P_sha256+" "+pubkey_comp_sha256+" "+rmdU_pref_sha256_1+" "+rmdC_pref_sha256_1+" " \
             +rmdU_pref_sha256_2+" "+rmdC_pref_sha256_2+" "+str(add_inv)+" "+str(same1n)+" "+str(same2n)+" " \
-            +str(numb_inverse)+" "+str(add_inv_inverse)+" "+str(same1n_inverse)+" "+str(same2n_inverse), "utf-8"))
+            +str(numb_inverse)+" "+str(add_inv_inverse)+" "+str(same1n_inverse)+" "+str(same2n_inverse)+" " \
+            +str(aminusb)+" "+str(bminusa)+" "+str(aminusb_div)+" "+str(bminusa_div), "utf-8"))
             
             if b_word1 == "Yes" or b_word12 == "Yes" or b_word13 == "Yes" or b_word14 == "Yes" or b_word == "Yes" or b_word_pb_inv == "Yes" \
             or b_word_same1 == "Yes" or b_word_same1pb == "Yes" or b_word_same2 == "Yes" or b_word_same2pb == "Yes" :
@@ -605,6 +611,8 @@ class WebServer(BaseHTTPRequestHandler):
 <p id='same2y' style='color:#239B56;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='same2addr' style='color:blue;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='same2addrpb' style='color:blue;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
+<h4 style='color:brown;font-weight:bold;'>Endomorphism Properties</h4>
+<p id='endo_prop_1' style='color:blue;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 </div></div>""", "utf-8"))
             str_url = self.path[2:] #gettin /S outta way from url we do not need
             if str_url.startswith('5H') or str_url.startswith('5J') or str_url.startswith('5K'): # if url starts with 5H 5J 5K we request page by 5WIF
@@ -992,6 +1000,7 @@ $('.show_popup').click(function() {
         $('#addinvnInt_Inv').html(myArray[59]);
         $('#same1nInt_Inv').html(myArray[60]);
         $('#same2nInt_Inv').html(myArray[61]);
+        $('#endo_prop_1').html("a = "+myArray[56]+"<br>" + "b = "+myArray[57]+"<br>"+"a - b = <span style='color:#DE3163;' class='endo'>" + myArray[62]+"</span><br>"+"b - a = <span style='color:#DE3163;' class='endo'>"+myArray[63]+"</span><br>"+"(a - b) / 3 = <span style='color:#DE3163;' class='endo'>"+myArray[64]+"</span><br>"+"(b - a) / 3 = <span style='color:#DE3163;' class='endo'>"+myArray[65]+"</span>");
         $('.inner_address').click(function() {
             $(this).css("font-weight", "bold");
         })
@@ -1003,6 +1012,15 @@ $('.show_popup').click(function() {
             history.pushState({}, null, "http://localhost:3333/"+$('#current_page').html());
             $('*[value="'+(num)+'"]').click();
             })
+        })
+        $('.endo').click(function() {
+                let num = BigInt($(this).html()).toString(16);
+                $('.overlay_popup').click();
+                $.get("http://localhost:3333/S$"+num, function(data, status){
+                $('#main_content').html(data)
+                history.pushState({}, null, "http://localhost:3333/"+$('#current_page').html());
+                $('*[value="'+(num)+'"]').click();
+                })
         })
     })
     var popup_id = $('#' + $(this).attr('rel'));
@@ -1106,11 +1124,21 @@ $('#arrow_left').click(function() {
             $('#addinvnInt_Inv').html(myArray[59]);
             $('#same1nInt_Inv').html(myArray[60]);
             $('#same2nInt_Inv').html(myArray[61]);
+            $('#endo_prop_1').html("a = "+myArray[56]+"<br>" + "b = "+myArray[57]+"<br>"+"a - b = <span style='color:#DE3163;' class='endo'>" + myArray[62]+"</span><br>"+"b - a = <span style='color:#DE3163;' class='endo'>"+myArray[63]+"</span><br>"+"(a - b) / 3 = <span style='color:#DE3163;' class='endo'>"+myArray[64]+"</span><br>"+"(b - a) / 3 = <span style='color:#DE3163;' class='endo'>"+myArray[65]+"</span>");
             $('.inner_address').click(function() {
                 $(this).css("font-weight", "bold");
             })
             $('.sha256').click(function() {
                 let num = $(this).html();
+                $('.overlay_popup').click();
+                $.get("http://localhost:3333/S$"+num, function(data, status){
+                $('#main_content').html(data)
+                history.pushState({}, null, "http://localhost:3333/"+$('#current_page').html());
+                $('*[value="'+(num)+'"]').click();
+                })
+            })
+            $('.endo').click(function() {
+                let num = BigInt($(this).html()).toString(16);
                 $('.overlay_popup').click();
                 $.get("http://localhost:3333/S$"+num, function(data, status){
                 $('#main_content').html(data)
@@ -1187,11 +1215,21 @@ $('#arrow_right').click(function() {
             $('#addinvnInt_Inv').html(myArray[59]);
             $('#same1nInt_Inv').html(myArray[60]);
             $('#same2nInt_Inv').html(myArray[61]);
+            $('#endo_prop_1').html("a = "+myArray[56]+"<br>" + "b = "+myArray[57]+"<br>"+"a - b = <span style='color:#DE3163;' class='endo'>" + myArray[62]+"</span><br>"+"b - a = <span style='color:#DE3163;' class='endo'>"+myArray[63]+"</span><br>"+"(a - b) / 3 = <span style='color:#DE3163;' class='endo'>"+myArray[64]+"</span><br>"+"(b - a) / 3 = <span style='color:#DE3163;' class='endo'>"+myArray[65]+"</span>");
             $('.inner_address').click(function() {
                 $(this).css("font-weight", "bold");
             })
             $('.sha256').click(function() {
                 let num = $(this).html();
+                $('.overlay_popup').click();
+                $.get("http://localhost:3333/S$"+num, function(data, status){
+                $('#main_content').html(data)
+                history.pushState({}, null, "http://localhost:3333/"+$('#current_page').html());
+                $('*[value="'+(num)+'"]').click();
+                })
+            })
+            $('.endo').click(function() {
+                let num = BigInt($(this).html()).toString(16);
                 $('.overlay_popup').click();
                 $.get("http://localhost:3333/S$"+num, function(data, status){
                 $('#main_content').html(data)
@@ -1268,6 +1306,8 @@ $('#arrow_right').click(function() {
 <p id='same2y' style='color:#239B56;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='same2addr' style='color:blue;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='same2addrpb' style='color:blue;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
+<h4 style='color:brown;font-weight:bold;'>Endomorphism Properties</h4>
+<p id='endo_prop_1' style='color:blue;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 </div></div>""", "utf-8"))
             ###--------setting values for num(page number) previous and next page------------
             str_url = self.path[2:]
@@ -1516,11 +1556,21 @@ $('.show_popup').click(function() {
         $('#addinvnInt_Inv').html(myArray[59]);
         $('#same1nInt_Inv').html(myArray[60]);
         $('#same2nInt_Inv').html(myArray[61]);
+        $('#endo_prop_1').html("a = "+myArray[56]+"<br>" + "b = "+myArray[57]+"<br>"+"a - b = <span style='color:#DE3163;' class='endo'>" + myArray[62]+"</span><br>"+"b - a = <span style='color:#DE3163;' class='endo'>"+myArray[63]+"</span><br>"+"(a - b) / 3 = <span style='color:#DE3163;' class='endo'>"+myArray[64]+"</span><br>"+"(b - a) / 3 = <span style='color:#DE3163;' class='endo'>"+myArray[65]+"</span>");
         $('.inner_address').click(function() {
             $(this).css("font-weight", "bold");
         })
         $('.sha256').click(function() {
                 let num = $(this).html();
+                $('.overlay_popup').click();
+                $.get("http://localhost:3333/S$"+num, function(data, status){
+                $('#main_content').html(data)
+                history.pushState({}, null, "http://localhost:3333/"+$('#current_page').html());
+                $('*[value="'+(num)+'"]').click();
+                })
+        })
+        $('.endo').click(function() {
+                let num = BigInt($(this).html()).toString(16);
                 $('.overlay_popup').click();
                 $.get("http://localhost:3333/S$"+num, function(data, status){
                 $('#main_content').html(data)
@@ -1630,11 +1680,21 @@ $('#arrow_left').click(function() {
             $('#addinvnInt_Inv').html(myArray[59]);
             $('#same1nInt_Inv').html(myArray[60]);
             $('#same2nInt_Inv').html(myArray[61]);
+            $('#endo_prop_1').html("a = "+myArray[56]+"<br>" + "b = "+myArray[57]+"<br>"+"a - b = <span style='color:#DE3163;' class='endo'>" + myArray[62]+"</span><br>"+"b - a = <span style='color:#DE3163;' class='endo'>"+myArray[63]+"</span><br>"+"(a - b) / 3 = <span style='color:#DE3163;' class='endo'>"+myArray[64]+"</span><br>"+"(b - a) / 3 = <span style='color:#DE3163;' class='endo'>"+myArray[65]+"</span>");
             $('.inner_address').click(function() {
                 $(this).css("font-weight", "bold");
             })
             $('.sha256').click(function() {
                 let num = $(this).html();
+                $('.overlay_popup').click();
+                $.get("http://localhost:3333/S$"+num, function(data, status){
+                $('#main_content').html(data)
+                history.pushState({}, null, "http://localhost:3333/"+$('#current_page').html());
+                $('*[value="'+(num)+'"]').click();
+                })
+            })
+            $('.endo').click(function() {
+                let num = BigInt($(this).html()).toString(16);
                 $('.overlay_popup').click();
                 $.get("http://localhost:3333/S$"+num, function(data, status){
                 $('#main_content').html(data)
@@ -1711,11 +1771,21 @@ $('#arrow_right').click(function() {
             $('#addinvnInt_Inv').html(myArray[59]);
             $('#same1nInt_Inv').html(myArray[60]);
             $('#same2nInt_Inv').html(myArray[61]);
+            $('#endo_prop_1').html("a = "+myArray[56]+"<br>" + "b = "+myArray[57]+"<br>"+"a - b = <span style='color:#DE3163;' class='endo'>" + myArray[62]+"</span><br>"+"b - a = <span style='color:#DE3163;' class='endo'>"+myArray[63]+"</span><br>"+"(a - b) / 3 = <span style='color:#DE3163;' class='endo'>"+myArray[64]+"</span><br>"+"(b - a) / 3 = <span style='color:#DE3163;' class='endo'>"+myArray[65]+"</span>");
             $('.inner_address').click(function() {
                 $(this).css("font-weight", "bold");
             })
             $('.sha256').click(function() {
                 let num = $(this).html();
+                $('.overlay_popup').click();
+                $.get("http://localhost:3333/S$"+num, function(data, status){
+                $('#main_content').html(data)
+                history.pushState({}, null, "http://localhost:3333/"+$('#current_page').html());
+                $('*[value="'+(num)+'"]').click();
+                })
+            })
+            $('.endo').click(function() {
+                let num = BigInt($(this).html()).toString(16);
                 $('.overlay_popup').click();
                 $.get("http://localhost:3333/S$"+num, function(data, status){
                 $('#main_content').html(data)
@@ -1764,6 +1834,7 @@ a:hover {text-decoration: underline;}
 #same1n:hover{cursor:pointer;text-decoration: underline;}
 #same2n:hover{cursor:pointer;text-decoration: underline;}
 .sha256:hover{cursor:pointer;text-decoration: underline;}
+.endo:hover{cursor:pointer;text-decoration: underline;}
 #down:hover{box-shadow:0 0 3px #656D9E;cursor:pointer;border:2px solid white;}
 .arrow:focus {outline: none;}
 input[type=text], select {width:640px;padding:8px 10px;margin: 2px 0;display: inline-block;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;text-align:center;}
@@ -1975,6 +2046,8 @@ $('#stop_auto_seq').click(function() {
 <p id='same2y' style='color:#239B56;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='same2addr' style='color:blue;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 <p id='same2addrpb' style='color:blue;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
+<h4 style='color:brown;font-weight:bold;'>Endomorphism Properties</h4>
+<p id='endo_prop_1' style='color:blue;background:#D7DBDD;padding:3px;font-weight:bold;font-size: 12px;'></p>
 </div></div>""", "utf-8"))
             #self.wfile.write(bytes("<p style='color:#34495E;font-weight:bold;'>123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz - Base58</p>", "utf-8"))
             ###-----------------------------------------------------------------------------------------
@@ -2374,6 +2447,7 @@ $('.show_popup').click(function() {
         $('#addinvnInt_Inv').html(myArray[59]);
         $('#same1nInt_Inv').html(myArray[60]);
         $('#same2nInt_Inv').html(myArray[61]);
+        $('#endo_prop_1').html("a = "+myArray[56]+"<br>" + "b = "+myArray[57]+"<br>"+"a - b = <span style='color:#DE3163;' class='endo'>" + myArray[62]+"</span><br>"+"b - a = <span style='color:#DE3163;' class='endo'>"+myArray[63]+"</span><br>"+"(a - b) / 3 = <span style='color:#DE3163;' class='endo'>"+myArray[64]+"</span><br>"+"(b - a) / 3 = <span style='color:#DE3163;' class='endo'>"+myArray[65]+"</span>");
         $('.inner_address').click(function() {
             $(this).css("font-weight", "bold");
         })
@@ -2385,7 +2459,16 @@ $('.show_popup').click(function() {
                 history.pushState({}, null, "http://localhost:3333/"+$('#current_page').html());
                 $('*[value="'+(num)+'"]').click();
                 })
-            })
+        })
+        $('.endo').click(function() {
+                let num = BigInt($(this).html()).toString(16);
+                $('.overlay_popup').click();
+                $.get("http://localhost:3333/S$"+num, function(data, status){
+                $('#main_content').html(data)
+                history.pushState({}, null, "http://localhost:3333/"+$('#current_page').html());
+                $('*[value="'+(num)+'"]').click();
+                })
+        })
     })
     var popup_id = $('#' + $(this).attr('rel'));
     $(popup_id).show();
@@ -2490,11 +2573,21 @@ $('#arrow_left').click(function() {
             $('#addinvnInt_Inv').html(myArray[59]);
             $('#same1nInt_Inv').html(myArray[60]);
             $('#same2nInt_Inv').html(myArray[61]);
+            $('#endo_prop_1').html("a = "+myArray[56]+"<br>" + "b = "+myArray[57]+"<br>"+"a - b = <span style='color:#DE3163;' class='endo'>" + myArray[62]+"</span><br>"+"b - a = <span style='color:#DE3163;' class='endo'>"+myArray[63]+"</span><br>"+"(a - b) / 3 = <span style='color:#DE3163;' class='endo'>"+myArray[64]+"</span><br>"+"(b - a) / 3 = <span style='color:#DE3163;' class='endo'>"+myArray[65]+"</span>");
             $('.inner_address').click(function() {
                 $(this).css("font-weight", "bold");
             })
             $('.sha256').click(function() {
                 let num = $(this).html();
+                $('.overlay_popup').click();
+                $.get("http://localhost:3333/S$"+num, function(data, status){
+                $('#main_content').html(data)
+                history.pushState({}, null, "http://localhost:3333/"+$('#current_page').html());
+                $('*[value="'+(num)+'"]').click();
+                })
+            })
+            $('.endo').click(function() {
+                let num = BigInt($(this).html()).toString(16);
                 $('.overlay_popup').click();
                 $.get("http://localhost:3333/S$"+num, function(data, status){
                 $('#main_content').html(data)
@@ -2571,11 +2664,21 @@ $('#arrow_right').click(function() {
             $('#addinvnInt_Inv').html(myArray[59]);
             $('#same1nInt_Inv').html(myArray[60]);
             $('#same2nInt_Inv').html(myArray[61]);
+            $('#endo_prop_1').html("a = "+myArray[56]+"<br>" + "b = "+myArray[57]+"<br>"+"a - b = <span style='color:#DE3163;' class='endo'>" + myArray[62]+"</span><br>"+"b - a = <span style='color:#DE3163;' class='endo'>"+myArray[63]+"</span><br>"+"(a - b) / 3 = <span style='color:#DE3163;' class='endo'>"+myArray[64]+"</span><br>"+"(b - a) / 3 = <span style='color:#DE3163;' class='endo'>"+myArray[65]+"</span>");
             $('.inner_address').click(function() {
                 $(this).css("font-weight", "bold");
             })
             $('.sha256').click(function() {
                 let num = $(this).html();
+                $('.overlay_popup').click();
+                $.get("http://localhost:3333/S$"+num, function(data, status){
+                $('#main_content').html(data)
+                history.pushState({}, null, "http://localhost:3333/"+$('#current_page').html());
+                $('*[value="'+(num)+'"]').click();
+                })
+            })
+            $('.endo').click(function() {
+                let num = BigInt($(this).html()).toString(16);
                 $('.overlay_popup').click();
                 $.get("http://localhost:3333/S$"+num, function(data, status){
                 $('#main_content').html(data)
