@@ -1014,7 +1014,7 @@ $('.show_popup').click(function() {
             })
         })
         $('.endo').click(function() {
-                let num = BigInt($(this).html()).toString(16);
+                let num = BigInt($(this).html()).toString(16).padStart(64, "0");
                 $('.overlay_popup').click();
                 $.get("http://localhost:3333/S$"+num, function(data, status){
                 $('#main_content').html(data)
@@ -1138,7 +1138,7 @@ $('#arrow_left').click(function() {
                 })
             })
             $('.endo').click(function() {
-                let num = BigInt($(this).html()).toString(16);
+                let num = BigInt($(this).html()).toString(16).padStart(64, "0");
                 $('.overlay_popup').click();
                 $.get("http://localhost:3333/S$"+num, function(data, status){
                 $('#main_content').html(data)
@@ -1229,7 +1229,7 @@ $('#arrow_right').click(function() {
                 })
             })
             $('.endo').click(function() {
-                let num = BigInt($(this).html()).toString(16);
+                let num = BigInt($(this).html()).toString(16).padStart(64, "0");
                 $('.overlay_popup').click();
                 $.get("http://localhost:3333/S$"+num, function(data, status){
                 $('#main_content').html(data)
@@ -1570,7 +1570,7 @@ $('.show_popup').click(function() {
                 })
         })
         $('.endo').click(function() {
-                let num = BigInt($(this).html()).toString(16);
+                let num = BigInt($(this).html()).toString(16).padStart(64, "0");
                 $('.overlay_popup').click();
                 $.get("http://localhost:3333/S$"+num, function(data, status){
                 $('#main_content').html(data)
@@ -1694,7 +1694,7 @@ $('#arrow_left').click(function() {
                 })
             })
             $('.endo').click(function() {
-                let num = BigInt($(this).html()).toString(16);
+                let num = BigInt($(this).html()).toString(16).padStart(64, "0");
                 $('.overlay_popup').click();
                 $.get("http://localhost:3333/S$"+num, function(data, status){
                 $('#main_content').html(data)
@@ -1785,7 +1785,7 @@ $('#arrow_right').click(function() {
                 })
             })
             $('.endo').click(function() {
-                let num = BigInt($(this).html()).toString(16);
+                let num = BigInt($(this).html()).toString(16).padStart(64, "0");
                 $('.overlay_popup').click();
                 $.get("http://localhost:3333/S$"+num, function(data, status){
                 $('#main_content').html(data)
@@ -2461,7 +2461,7 @@ $('.show_popup').click(function() {
                 })
         })
         $('.endo').click(function() {
-                let num = BigInt($(this).html()).toString(16);
+                let num = BigInt($(this).html()).toString(16).padStart(64, "0");
                 $('.overlay_popup').click();
                 $.get("http://localhost:3333/S$"+num, function(data, status){
                 $('#main_content').html(data)
@@ -2587,7 +2587,7 @@ $('#arrow_left').click(function() {
                 })
             })
             $('.endo').click(function() {
-                let num = BigInt($(this).html()).toString(16);
+                let num = BigInt($(this).html()).toString(16).padStart(64, "0");
                 $('.overlay_popup').click();
                 $.get("http://localhost:3333/S$"+num, function(data, status){
                 $('#main_content').html(data)
@@ -2678,7 +2678,7 @@ $('#arrow_right').click(function() {
                 })
             })
             $('.endo').click(function() {
-                let num = BigInt($(this).html()).toString(16);
+                let num = BigInt($(this).html()).toString(16).padStart(64, "0");
                 $('.overlay_popup').click();
                 $.get("http://localhost:3333/S$"+num, function(data, status){
                 $('#main_content').html(data)
