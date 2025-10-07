@@ -8,6 +8,8 @@
 
 <img width="1920" height="1080" alt="Screenshot_2025-09-21_22-44-38" src="https://github.com/user-attachments/assets/50b3b7a2-6f93-41f1-827e-4ea230305ed4" />
 
+<b><a href="https://bitcointalk.org/index.php?topic=5557085.0">https://bitcointalk.org/index.php?topic=5557085.0</a></b><br>
+<pre>A-B=P (Click any privatekey. Click last endo property result. The answer(A-B=P) will be in its endo properties.)</pre>
 <img width="1920" height="1080" alt="Screenshot_2025-10-07_21-43-17" src="https://github.com/user-attachments/assets/6887473f-7030-4d07-8095-248b2d16de5d" />
 
 <pre>
