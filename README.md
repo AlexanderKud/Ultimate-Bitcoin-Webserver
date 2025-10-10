@@ -1,8 +1,8 @@
 # Ultimate-Bitcoin-Webserver (Linux and Windows)
 <b>Powered by <a href="https://github.com/AlexanderKud/Secp256k1_PythonLibrary">https://github.com/AlexanderKud/Secp256k1_PythonLibrary</a></b><br>
-<pre>python packages to install: pygame bitcoinlib base58</pre>
+<pre>python packages to install: pygame base58</pre>
 
-<img width="1920" height="1080" alt="Screenshot_2025-09-21_22-44-06" src="https://github.com/user-attachments/assets/fa8758ba-b93c-4413-892d-d935a04c79f2" />
+<img width="1920" height="1080" alt="Screenshot (1)" src="https://github.com/user-attachments/assets/9d288a35-341a-4cea-8c2f-47ebe5dfa677" />
 
 <img width="1920" height="1080" alt="Screenshot_2025-09-21_22-44-22" src="https://github.com/user-attachments/assets/e799b262-a40c-4355-9fe5-7278c53396dc" />
 
