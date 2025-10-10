@@ -3,7 +3,7 @@
 <pre>python packages to install: pygame base58</pre>
 <pre>Added LCG Random Generator(3 options) 
 1) lcg_seed = set_your_value 
-2) lcg_seed = random_number (Set to this option in webserver.py)
+2) lcg_seed = random_number (By Default is set to this option in webserver.py)
 3) lcg_seed = from_file
 You can save manually after stop button press. (Now Page# [Value])
 </pre>
