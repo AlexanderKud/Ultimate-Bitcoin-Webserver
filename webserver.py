@@ -1,7 +1,6 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import p2tr_util
 import secp256k1
-#import bitcoinlib
 from datetime import datetime
 import base58
 import binascii
@@ -26,14 +25,14 @@ column8 = '480' # Address Bech32m P2TR
 column9 = '398' # WIF Private Key Compressed
 #---privatekeys and addresses columns width end----------------
 
-random_speed = 150
-bruteforce_speed = 150
-lcg_speed = 170
+random_speed = 100
+bruteforce_speed = 100
+lcg_speed = 120
 #lcg_seed = 1
-lcg_seed = random.randrange(1, 904625697166532776746648320380374280100293470930272690489102837043110636675)
-#lcg_file = open("lcg_seed.txt", 'r')
-#lcg_seed = (lcg_file.readline()).strip()
-#lcg_file.close()
+#lcg_seed = random.randrange(1, 904625697166532776746648320380374280100293470930272690489102837043110636675)
+lcg_file = open("lcg_seed.txt", 'r')
+lcg_seed = (lcg_file.readline()).strip()
+lcg_file.close()
 
 N = 115792089237316195423570985008687907852837564279074904382605163141518161494337
 N1 = 37718080363155996902926221483475020450927657555482586988616620542887997980018
@@ -405,8 +404,7 @@ class WebServer(BaseHTTPRequestHandler):
             addrU_one = secp256k1.publickey_to_address(0, False, pub)
             addrC_one = secp256k1.publickey_to_address(0, True, pub)
             addrP2sh_one = secp256k1.publickey_to_address(1, True, pub) #p2sh
-            addrbech32_one = secp256k1.publickey_to_address(2, True, pub) #bech32
-            #addrbech32_p2wsh = bitcoinlib.keys.Address('21'+secp256k1.point_to_cpub(pub)+'ac', encoding='bech32', script_type='p2wsh').address #bech32_p2swh
+            addrbech32_one = secp256k1.publickey_to_bech32_address(pub) #bech32
             addrbech32_p2wsh = secp256k1.publickey_to_bech32_p2wsh_address(pub)
             private_key = bytes.fromhex(hex(numb).lstrip('0x').zfill(64))
             taproot_tweaked_private_key = p2tr_util.taproot_tweak_seckey(private_key)
@@ -455,7 +453,7 @@ class WebServer(BaseHTTPRequestHandler):
             addrU = secp256k1.publickey_to_address(0, False, AP_pub)
             addrC = secp256k1.publickey_to_address(0, True, AP_pub)
             addrP2sh_inv = secp256k1.publickey_to_address(1, True, AP_pub) #p2sh
-            addrbech32_inv = secp256k1.publickey_to_address(2, True, AP_pub) #bech32
+            addrbech32_inv = secp256k1.publickey_to_bech32_address(AP_pub) #bech32
 
             b_word = "No"
             if secp256k1.bloom_check(0, addrU):
@@ -492,7 +490,7 @@ class WebServer(BaseHTTPRequestHandler):
             sameaddr1U = secp256k1.publickey_to_address(0, False, samey1P)
             sameaddr1C = secp256k1.publickey_to_address(0, True, samey1P)
             addrP2sh_same1 = secp256k1.publickey_to_address(1, True, samey1P) #p2sh
-            addrbech32_same1 = secp256k1.publickey_to_address(2, True, samey1P) #bech32
+            addrbech32_same1 = secp256k1.publickey_to_bech32_address(samey1P) #bech32
 
             b_word_same1 = "No"
             if secp256k1.bloom_check(0, sameaddr1U):
@@ -518,7 +516,7 @@ class WebServer(BaseHTTPRequestHandler):
             sameaddr2U = secp256k1.publickey_to_address(0, False, samey2P)
             sameaddr2C = secp256k1.publickey_to_address(0, True, samey2P)
             addrP2sh_same2 = secp256k1.publickey_to_address(1, True, samey2P) #p2sh
-            addrbech32_same2 = secp256k1.publickey_to_address(2, True, samey2P) #bech32
+            addrbech32_same2 = secp256k1.publickey_to_bech32_address(samey2P) #bech32
 
             b_word_same2 = "No"
             if secp256k1.bloom_check(0, sameaddr2U):
@@ -886,8 +884,7 @@ class WebServer(BaseHTTPRequestHandler):
                 __class__.bitAddr = secp256k1.publickey_to_address(0, False, pub)
                 __class__.bitAddr_C = secp256k1.publickey_to_address(0, True, pub)
                 addrP2sh = secp256k1.publickey_to_address(1, True, pub) #p2sh
-                addrbech32 = secp256k1.publickey_to_address(2, True, pub) #bech32
-                #addrbech32_p2wsh = bitcoinlib.keys.Address('21'+secp256k1.point_to_cpub(pub)+'ac', encoding='bech32', script_type='p2wsh').address #bech32_p2swh
+                addrbech32 = secp256k1.publickey_to_bech32_address(pub) #bech32
                 addrbech32_p2wsh = secp256k1.publickey_to_bech32_p2wsh_address(pub)
                 public_key_x_coordinate = pub[1:33]
                 taproot_tweaked_public_key = p2tr_util.public_key_x_coordinate_to_taproot_tweaked_pubkey(public_key_x_coordinate)
@@ -1449,8 +1446,7 @@ $('#arrow_right').click(function() {
                 __class__.bitAddr = secp256k1.publickey_to_address(0, False, pub)
                 __class__.bitAddr_C = secp256k1.publickey_to_address(0, True, pub)
                 addrP2sh = secp256k1.publickey_to_address(1, True, pub) #p2sh
-                addrbech32 = secp256k1.publickey_to_address(2, True, pub) #bech32
-                #addrbech32_p2wsh = bitcoinlib.keys.Address('21'+secp256k1.point_to_cpub(pub)+'ac', encoding='bech32', script_type='p2wsh').address #bech32_p2swh
+                addrbech32 = secp256k1.publickey_to_bech32_address(pub) #bech32
                 addrbech32_p2wsh = secp256k1.publickey_to_bech32_p2wsh_address(pub)
                 public_key_x_coordinate = pub[1:33]
                 taproot_tweaked_public_key = p2tr_util.public_key_x_coordinate_to_taproot_tweaked_pubkey(public_key_x_coordinate)
@@ -2382,8 +2378,7 @@ $('#stop_lcg').click(function() {
                 __class__.bitAddr = secp256k1.publickey_to_address(0, False, pub)
                 __class__.bitAddr_C = secp256k1.publickey_to_address(0, True, pub)
                 addrP2sh = secp256k1.publickey_to_address(1, True, pub) #p2sh
-                addrbech32 = secp256k1.publickey_to_address(2, True, pub) #bech32
-                #addrbech32_p2wsh = bitcoinlib.keys.Address('21'+secp256k1.point_to_cpub(pub)+'ac', encoding='bech32', script_type='p2wsh').address #bech32_p2swh
+                addrbech32 = secp256k1.publickey_to_bech32_address(pub) #bech32
                 addrbech32_p2wsh = secp256k1.publickey_to_bech32_p2wsh_address(pub)
                 public_key_x_coordinate = pub[1:33]
                 taproot_tweaked_public_key = p2tr_util.public_key_x_coordinate_to_taproot_tweaked_pubkey(public_key_x_coordinate)
