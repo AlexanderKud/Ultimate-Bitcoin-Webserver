@@ -2,8 +2,6 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import p2tr_util
 import secp256k1
 from datetime import datetime
-import base58
-import binascii
 import random
 import hashlib
 import math
@@ -29,10 +27,10 @@ random_speed = 100
 bruteforce_speed = 100
 lcg_speed = 120
 #lcg_seed = 1
-lcg_seed = random.randrange(1, 904625697166532776746648320380374280100293470930272690489102837043110636675)
-#lcg_file = open("lcg_seed.txt", 'r')
-#lcg_seed = (lcg_file.readline()).strip()
-#lcg_file.close()
+#lcg_seed = random.randrange(1, 904625697166532776746648320380374280100293470930272690489102837043110636675)
+lcg_file = open("lcg_seed.txt", 'r')
+lcg_seed = (lcg_file.readline()).strip()
+lcg_file.close()
 
 N = 115792089237316195423570985008687907852837564279074904382605163141518161494337
 N1 = 37718080363155996902926221483475020450927657555482586988616620542887997980018
@@ -46,10 +44,9 @@ if start_mode == 'classic':
     #Point_Coefficient = 30781790967544911494582500996531003187086143316059192026830350010175657684227
     #Point_Coefficient = 2
     #Point_Coefficient = 57896044618658097711785492504343953926418782139537452191302581570759080747169
-    Point_Coefficient = 1
     #Point_Coefficient = (2**3000) % N
+    Point_Coefficient = 1
     G = secp256k1.scalar_multiplication(Point_Coefficient)
-    #G = secp256k1lib.scalar_multiplication(Point_Coefficient)
     current_mode = "classic_G_Point"    
 elif start_mode == 'random':
     Point_Coefficient = random.randrange(1, N)
@@ -78,7 +75,6 @@ def sha256(data):
     digest = hashlib.new("sha256")
     digest.update(bytes.fromhex(data))
     return digest.hexdigest()
-    #return digest.digest().hex()
 
 class WebServer(BaseHTTPRequestHandler):
     num=startPrivKey=previous=next=random=random5H=random5J=random5K=randomKw=randomKx=randomKy=randomKz=randomL1=randomL2=randomL3=randomL4=randomL5=0
@@ -623,13 +619,8 @@ class WebServer(BaseHTTPRequestHandler):
 </div></div>""", "utf-8"))
             str_url = self.path[2:] #gettin /S outta way from url we do not need
             if str_url.startswith('5H') or str_url.startswith('5J') or str_url.startswith('5K'): # if url starts with 5H 5J 5K we request page by 5WIF
-                first_encode = base58.b58decode(self.path[2:])
-                private_key_full = binascii.hexlify(first_encode)
-                private_key = private_key_full[2:-8]
-                private_key_hex = private_key.decode("utf-8")
-                keyU = int(private_key_hex,16)
-                __class__.searchKey = secp256k1.privatekey_to_address(0, False, keyU)
-                __class__.num = int(private_key_hex,16)
+                __class__.num = secp256k1.wif_to_privatekey(str_url.strip())
+                __class__.searchKey = secp256k1.privatekey_to_address(0, False, __class__.num)
                 temp_num = __class__.num
                 __class__.num = __class__.num // 128
                 if __class__.num * 128 != temp_num:
@@ -642,13 +633,8 @@ class WebServer(BaseHTTPRequestHandler):
                     __class__.next = __class__.max
                 __class__.random = __class__.RandomInteger(__class__.randomMin,__class__.randomMax)
             elif str_url.startswith('K') or str_url.startswith('L'): # if url starts with L K we request page by LWIF KWIF
-                first_encode = base58.b58decode(self.path[2:])
-                private_key_full = binascii.hexlify(first_encode)
-                private_key = private_key_full[2:-8]
-                private_key_hex = private_key.decode("utf-8")
-                keyC = int(private_key_hex[0:64],16)
-                __class__.searchKey = secp256k1.privatekey_to_address(0, True, keyC)
-                __class__.num = int(private_key_hex[0:64],16);
+                __class__.num = secp256k1.wif_to_privatekey(str_url.strip())
+                __class__.searchKey = secp256k1.privatekey_to_address(0, True, __class__.num)
                 temp_num = __class__.num
                 __class__.num = __class__.num // 128
                 if __class__.num * 128 != temp_num:
@@ -2109,13 +2095,8 @@ $('#stop_lcg').click(function() {
             ###-----------------------------------------------------------------------------------------
             str_url = self.path[1:] #gettin / outta way from url we do not need
             if str_url.startswith('5H') or str_url.startswith('5J') or str_url.startswith('5K'): # if url starts with 5H 5J 5K we request page by 5WIF
-                first_encode = base58.b58decode(self.path[1:])
-                private_key_full = binascii.hexlify(first_encode)
-                private_key = private_key_full[2:-8]
-                private_key_hex = private_key.decode("utf-8")
-                keyU = int(private_key_hex,16)
-                __class__.searchKey = secp256k1.privatekey_to_address(0, False, keyU)
-                __class__.num = int(private_key_hex,16)
+                __class__.num = secp256k1.wif_to_privatekey(self.path[1:].strip())
+                __class__.searchKey = secp256k1.privatekey_to_address(0, False, __class__.num)
                 temp_num = __class__.num
                 __class__.num = __class__.num // 128
                 if __class__.num * 128 != temp_num:
@@ -2128,13 +2109,8 @@ $('#stop_lcg').click(function() {
                     __class__.next = __class__.max
                 __class__.random = __class__.RandomInteger(__class__.randomMin,__class__.randomMax)
             elif str_url.startswith('K') or str_url.startswith('L'): # if url starts with L K we request page by LWIF KWIF
-                first_encode = base58.b58decode(self.path[1:])
-                private_key_full = binascii.hexlify(first_encode)
-                private_key = private_key_full[2:-8]
-                private_key_hex = private_key.decode("utf-8")
-                keyC = int(private_key_hex[0:64],16)
-                __class__.searchKey = secp256k1.privatekey_to_address(0, True, keyC)
-                __class__.num = int(private_key_hex[0:64],16);
+                __class__.num = secp256k1.wif_to_privatekey(self.path[1:].strip())
+                __class__.searchKey = secp256k1.privatekey_to_address(0, True, __class__.num)
                 temp_num = __class__.num
                 __class__.num = __class__.num // 128
                 if __class__.num * 128 != temp_num:
