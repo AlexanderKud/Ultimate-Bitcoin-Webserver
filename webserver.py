@@ -2016,7 +2016,7 @@ function random_lcg() {
     $.get("http://localhost:3333/A"+ current_seed, function(data, status){
         $('#main_content').html(data);
         $('#p_checked_lcg').html(++checked_pages);
-        history.pushState({}, null, "http://localhost:3333/"+$('#current_page').html());
+        history.replaceState({}, null, "http://localhost:3333/"+$('#current_page').html());
         if($('#balance').html().includes("True")) {
             f_num = f_num + 1;
             $('#found_num_lcg').html(f_num);
