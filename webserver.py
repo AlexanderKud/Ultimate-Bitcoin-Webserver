@@ -378,6 +378,7 @@ class WebServer(BaseHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
         self.send_header("Content-type", "text/html")
+        self.send_header("Cache-Control", "no-store, no-cache, must-revalidate")
         self.end_headers()
 #-------------------------------------------------------------------------------------------------AJAX Fetch Page PART---------------------------------------
         str_url = self.path[1:] #removing / from url as we do not need it
