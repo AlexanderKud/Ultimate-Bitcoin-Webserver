@@ -1923,7 +1923,7 @@ function rolling(){
     $.get("http://localhost:3333/A"+numPage, function(data, status){
         $('#main_content').html(data);
         $('#p_checked').html(++checked_pages);
-        history.pushState({}, null, "http://localhost:3333/"+numPage);
+        history.replaceState({}, null, "http://localhost:3333/"+numPage);
         if($('#balance').html().includes("True")) {
             f_num = f_num + 1;
             $('#found_num').html(f_num);
@@ -1976,7 +1976,7 @@ function sequence() {
         $.get("http://localhost:3333/A"+ page_number, function(data, status){
             $('#main_content').html(data);
             $('#p_checked_seq').html(++checked_pages);
-            history.pushState({}, null, "http://localhost:3333/"+$('#current_page').html());
+            history.replaceState({}, null, "http://localhost:3333/"+$('#current_page').html());
             if($('#balance').html().includes("True")) {
                 f_num = f_num + 1;
                 $('#found_num_seq').html(f_num);
