@@ -1,6 +1,6 @@
 # Ultimate-Bitcoin-Webserver (Linux and Windows)
 <b>Powered by <a href="https://github.com/AlexanderKud/Secp256k1_PythonLibrary">https://github.com/AlexanderKud/Secp256k1_PythonLibrary</a></b><br>
-<pre>python packages to install: pygame base58</pre>
+<pre>python packages to install: pygame</pre>
 <pre>Added LCG Random Generator(3 options) 
 1) lcg_seed = set_your_value 
 2) lcg_seed = random_number (By Default is set to this option in webserver.py)
