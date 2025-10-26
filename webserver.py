@@ -1876,8 +1876,8 @@ var randomDifference = BigInt(0);
 var f_num = 0;
 var status_str = '';
 const big_m = BigInt("904625697166532776746648320380374280100293470930272690489102837043110636675");
-const big_a = BigInt("0x7c3c3267d015ceb5");
-const big_b = BigInt("0x24bd2d95276253a9");
+const big_a = BigInt("0x5");
+const big_b = BigInt("0x3");
 $('#status_str').hide();
 $('#status_str_seq').hide();
 $('#status_str_lcg').hide();
@@ -1999,7 +1999,7 @@ $('#stop_auto_seq').click(function() {
     $('#status_str_seq').fadeOut(1000);
 })
 function random_lcg() {
-    current_seed = (current_seed*big_a + big_b) % big_m;
+    current_seed = (current_seed*big_a + big_c) % big_m;
     $.get("http://localhost:3333/A"+ current_seed, function(data, status){
         $('#main_content').html(data);
         $('#p_checked_lcg').html(++checked_pages);
