@@ -1876,8 +1876,8 @@ var randomDifference = BigInt(0);
 var f_num = 0;
 var status_str = '';
 const big_m = BigInt("904625697166532776746648320380374280100293470930272690489102837043110636675");
-const big_a = BigInt("0x7c3c3267d015ceb5");
-const big_c = BigInt("0x24bd2d95276253a9");
+const big_a = BigInt("180925139433306555349329664076074856020058694186054538097820567408622127336"); // (a-1) is disible by all prime factors of m
+const big_c = BigInt("515632688755809962995056521010959524332447654020985271384097901322695370729"); // (c = any positive integer less than m) and gcd(c, m) == 1 (c and m are coprime)
 $('#status_str').hide();
 $('#status_str_seq').hide();
 $('#status_str_lcg').hide();
