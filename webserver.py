@@ -1861,7 +1861,7 @@ Pages checked: <b id='p_checked_seq'>0</b></span>
 Pages checked: <b id='p_checked_lcg'>0</b></span>
 <script>
 const random_speed = """+str(random_speed)+""", sequence_speed = """+str(bruteforce_speed)+""", lcg_speed = """+str(lcg_speed)+""";
-var current_seed = BigInt("""+str(lcg_seed)+""");
+var current_seed = """+str(lcg_seed)+"""n;
 var page_number = BigInt(0);
 var checked_pages = BigInt(0);
 var increment = BigInt(0);
