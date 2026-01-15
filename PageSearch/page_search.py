@@ -85,4 +85,3 @@ while True:
             f.write(f"{lcg_seed}\n")
         print(f'[{datetime.now().strftime("%H:%M:%S")}] - Current LCG seed written to file')
         
-    
