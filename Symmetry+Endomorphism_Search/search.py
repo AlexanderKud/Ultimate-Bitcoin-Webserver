@@ -99,4 +99,3 @@ while True:
     points.clear()
     privkeys.clear()
         
-    
