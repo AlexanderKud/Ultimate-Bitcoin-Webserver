@@ -1861,7 +1861,7 @@ Pages checked: <b id='p_checked_seq'>0</b></span>
 Pages checked: <b id='p_checked_lcg'>0</b></span>
 <script>
 const random_speed = """+str(random_speed)+""", sequence_speed = """+str(bruteforce_speed)+""", lcg_speed = """+str(lcg_speed)+""";
-var current_seed = BigInt("""+str(lcg_seed)+""");
+var current_seed = """+str(lcg_seed)+"""n;
 var page_number = BigInt(0);
 var checked_pages = BigInt(0);
 var increment = BigInt(0);
@@ -1875,9 +1875,9 @@ var divisor = BigInt(0);
 var randomDifference = BigInt(0);
 var f_num = 0;
 var status_str = '';
-const big_m = BigInt("904625697166532776746648320380374280100293470930272690489102837043110636675");
-const big_a = BigInt("0x7c3c3267d015ceb5");
-const big_b = BigInt("0x24bd2d95276253a9");
+const big_m = BigInt("904625697166532776746648320380374280100293470930272690489102837043110636675"); // in order for the sequence to have full period
+const big_a = BigInt("180925139433306555349329664076074856020058694186054538097820567408622127336"); // (a-1) is divisible by all prime factors of m (5,11,29,211,2221,24371,6119161,1623087694307053270266275330414301965675413090185657913)
+const big_c = BigInt("515632688755809962995056521010959524332447654020985271384097901322695370729"); // (c = any positive integer less than m) and gcd(c, m) == 1 (c and m are coprime)
 $('#status_str').hide();
 $('#status_str_seq').hide();
 $('#status_str_lcg').hide();
@@ -1999,7 +1999,7 @@ $('#stop_auto_seq').click(function() {
     $('#status_str_seq').fadeOut(1000);
 })
 function random_lcg() {
-    current_seed = (current_seed*big_a + big_b) % big_m;
+    current_seed = (current_seed*big_a + big_c) % big_m;
     $.get("http://localhost:3333/A"+ current_seed, function(data, status){
         $('#main_content').html(data);
         $('#p_checked_lcg').html(++checked_pages);
